@@ -1,0 +1,247 @@
+/* ---------- hero ---------- */
+.hero {
+  margin-bottom: 40px;
+}
+.kicker {
+  margin-bottom: 12px;
+}
+.heroTitle {
+  font-size: 38px;
+  margin-bottom: 16px;
+}
+.heroIntro {
+  font-size: 16px;
+  max-width: 36rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- search pill ---------- */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 48px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--p-line);
+  box-shadow: 0 4px 16px rgba(10, 10, 10, 0.04);
+}
+.searchIcon {
+  flex-shrink: 0;
+  margin-left: 12px;
+  color: var(--ink-muted);
+}
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+}
+.searchBtn {
+  flex-shrink: 0;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- section chrome ---------- */
+.section {
+  margin-bottom: 48px;
+}
+.sectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.sectionTitle {
+  font-size: 24px;
+  margin-top: 4px;
+}
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rani);
+  white-space: nowrap;
+}
+
+/* ---------- featured instructor grid (2-up mobile, 4-up desktop) ---------- */
+.instructorGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.instructorCard {
+  display: block;
+  text-align: left;
+  border-radius: 16px;
+}
+.tile {
+  display: block;
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.tileTag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+}
+.tileInitials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  color: rgba(255, 255, 255, 0.95);
+}
+.tileMeta {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+.tileRating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.instructorName {
+  display: block;
+  font-size: 16px;
+}
+.instructorStyle {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+/* ---------- open-spot workshop rows ---------- */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+.rowAvatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+}
+.rowBody {
+  flex: 1;
+  min-width: 0;
+}
+.rowTitle {
+  display: block;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rowMeta {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.rowRight {
+  flex-shrink: 0;
+  text-align: right;
+}
+.rowPrice {
+  display: block;
+  font-size: 16px;
+}
+.spotsUrgent {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--vermilion);
+}
+.spotsOk {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--teal);
+}
+.rowChevron {
+  display: none;
+  flex-shrink: 0;
+  color: var(--ink-muted);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  .hero {
+    margin-bottom: 56px;
+  }
+  .heroTitle {
+    font-size: 68px;
+  }
+  .heroIntro {
+    font-size: 18px;
+  }
+  .sectionTitle {
+    font-size: 30px;
+  }
+  .instructorGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .tileInitials {
+    font-size: 60px;
+  }
+  .instructorName {
+    font-size: 18px;
+  }
+  .rowTitle {
+    font-size: 18px;
+  }
+  .rowPrice {
+    font-size: 18px;
+  }
+  .rowChevron {
+    display: block;
+  }
+}

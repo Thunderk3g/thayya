@@ -144,7 +144,7 @@ export default function Trainings() {
 
                 <span className={`tag-save ${styles.tag}`}>{row.save}</span>
 
-                <a className={`btn ${styles.btnSmall}`} href="#trainings">
+                <a className={`btn ${styles.btnSmall}`} href="/member/book">
                   Reserve a spot
                   <span className={styles.arrow} aria-hidden="true">
                     →

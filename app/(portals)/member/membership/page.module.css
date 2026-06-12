@@ -1,0 +1,162 @@
+/* ---------- page header ---------- */
+.head {
+  margin-bottom: 32px;
+}
+.kicker {
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+.title {
+  font-size: 32px;
+}
+
+/* ---------- loyalty card ---------- */
+.loyaltyCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 24px;
+  background: var(--ink);
+}
+.loyaltyGlow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 288px;
+  height: 288px;
+  border-radius: 999px;
+  opacity: 0.3;
+  filter: blur(64px);
+  pointer-events: none;
+}
+.loyaltyInner {
+  position: relative;
+  z-index: 1;
+}
+.loyaltyTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.loyaltyTier {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 4px;
+}
+.loyaltyTagline {
+  font-size: 24px;
+  margin-top: 4px;
+}
+.awardIcon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+}
+.points {
+  font-size: 48px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.pointsNote {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+.progressTrack {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 8px;
+}
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+}
+.nextTier {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ---------- refer / upgrade cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.card {
+  padding: 24px;
+  border-radius: 16px;
+}
+.cardUpgrade {
+  background: #fff;
+}
+.heartIcon {
+  color: var(--vermilion);
+  margin-bottom: 12px;
+}
+.sparklesIcon {
+  color: var(--saffron);
+  margin-bottom: 12px;
+}
+.cardTitle {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.cardBody {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.referBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rani);
+}
+.upgradeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+  .loyaltyCard {
+    padding: 40px;
+  }
+  .loyaltyTagline {
+    font-size: 30px;
+  }
+  .awardIcon {
+    width: 36px;
+    height: 36px;
+  }
+  .points {
+    font-size: 68px;
+  }
+  .pointsNote {
+    font-size: 16px;
+  }
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

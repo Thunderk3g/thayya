@@ -1,0 +1,219 @@
+/* ---------- back link ---------- */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+/* ---------- layout (stack mobile, 3/5 + 2/5 desktop) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* ---------- workshop details ---------- */
+.kicker {
+  margin-bottom: 8px;
+}
+.title {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.meta {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+.playBtn {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.playIcon {
+  color: #fff;
+}
+.previewLabel {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 1;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--p-bg-warm);
+  color: var(--ink-soft);
+}
+
+/* ---------- checkout card ---------- */
+.checkout {
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(10, 10, 10, 0.06);
+}
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.price {
+  font-size: 30px;
+}
+.spotsLeft {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--vermilion);
+}
+.priceNote {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 24px;
+}
+.summaryKicker {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.summary {
+  margin-bottom: 20px;
+}
+.summaryLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--p-line-soft);
+}
+.summaryValue {
+  font-weight: 600;
+}
+.summaryTotal {
+  border-bottom: 0;
+  font-weight: 700;
+}
+.totalValue {
+  font-size: 20px;
+}
+.confirmBtn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.paymentNote {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 12px;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+/* ---------- confirmation (step 2) ---------- */
+.confirmed {
+  text-align: center;
+  padding: 8px 0;
+}
+.confirmedIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 999px;
+  background: var(--teal);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.confirmedTitle {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.confirmedSub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.confirmedPoints {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.viewBookingsBtn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  text-align: center;
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 3fr 2fr;
+    gap: 32px;
+  }
+  .title {
+    font-size: 48px;
+  }
+  .description {
+    font-size: 16px;
+  }
+  .checkout {
+    position: sticky;
+    top: 128px;
+  }
+  .price {
+    font-size: 36px;
+  }
+}

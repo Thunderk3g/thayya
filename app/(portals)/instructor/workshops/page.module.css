@@ -1,0 +1,126 @@
+/* Instructor · My Workshops */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.newBtn {
+  font-size: 14px;
+  padding: 10px 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.date {
+  width: 56px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.day {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.month {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.divider {
+  display: none;
+  width: 1px;
+  height: 48px;
+  background: var(--p-line);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  min-width: 0;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right {
+  display: none;
+  text-align: right;
+}
+
+.booked {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .item {
+    gap: 20px;
+  }
+
+  .divider {
+    display: block;
+  }
+
+  .itemTitle {
+    font-size: 18px;
+  }
+
+  .right {
+    display: block;
+  }
+}

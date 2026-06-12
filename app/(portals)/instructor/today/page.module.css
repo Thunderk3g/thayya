@@ -1,0 +1,243 @@
+/* Instructor · Today */
+
+.head {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-top: 8px;
+  line-height: 1.05;
+}
+
+.brush {
+  font-size: 0.82em;
+}
+
+/* ---- April Drop hero ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  background: var(--ink);
+}
+
+.heroTint {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    color-mix(in srgb, var(--rani) 40%, transparent) 50%,
+    color-mix(in srgb, var(--teal) 50%, transparent) 100%
+  );
+}
+
+.heroGrid {
+  position: relative;
+  display: grid;
+}
+
+.heroLeft {
+  padding: 32px;
+}
+
+.dropBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  background: color-mix(in srgb, var(--saffron) 18%, transparent);
+  color: var(--saffron);
+}
+
+.heroTitle {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.05;
+}
+
+.heroBlurb {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 44ch;
+}
+
+.heroCta {
+  font-size: 14px;
+}
+
+.heroRight {
+  display: none;
+}
+
+.heroPanel {
+  position: absolute;
+  inset: 32px;
+  border-radius: 16px;
+  opacity: 0.9;
+}
+
+.heroNumeral {
+  position: relative;
+  font-size: 180px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---- stats grid ---- */
+.statsGrid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.nextCard {
+  padding: 24px;
+}
+
+.nextHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.nextTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+.nextMeta {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.track {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--p-line-soft);
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.monthCard {
+  padding: 24px;
+}
+
+.monthAmount {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.monthDelta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+/* ---- quick tiles ---- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.tile {
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.tileValue {
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.star {
+  color: var(--saffron);
+}
+
+.tileLabel {
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 60px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .heroLeft {
+    padding: 48px;
+  }
+
+  .heroTitle {
+    font-size: 48px;
+  }
+
+  .heroBlurb {
+    font-size: 16px;
+  }
+
+  .heroRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    position: relative;
+  }
+
+  .statsGrid {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .nextTitle {
+    font-size: 24px;
+  }
+
+  .monthAmount {
+    font-size: 38px;
+  }
+
+  .tiles {
+    gap: 16px;
+  }
+
+  .tileValue {
+    font-size: 36px;
+  }
+}

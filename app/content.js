@@ -5,7 +5,7 @@ export const HERO = {
   words: ["Move.", "Rise.", "Shine."],
   gradientWordIndex: 1,
   sub: "Movement rooted in Indian rhythms. Find your beat, your people, your power — one class at a time.",
-  primaryCta: { label: "Book a class", href: "#trainings" },
+  primaryCta: { label: "Book a class", href: "/member/discover" },
   secondaryCta: { label: "Become an instructor", href: "#journey" },
   marginalia: "தை யா — rhythm of the south",
   stats: [
@@ -172,7 +172,7 @@ export const FOOTER = {
     gradientWord: "rhythm",
     post: ".",
     sub: "Your first class is waiting.",
-    button: { label: "Book a class", href: "#trainings" },
+    button: { label: "Book a class", href: "/member/discover" },
   },
   links: [
     { label: "Classes", href: "#classes" },
@@ -192,5 +192,5 @@ export const NAV = {
     { label: "Trainings", href: "#trainings" },
     { label: "Community", href: "#community" },
   ],
-  cta: { label: "Book a class", href: "#trainings" },
+  cta: { label: "Book a class", href: "/member/discover" },
 };

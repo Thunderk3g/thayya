@@ -1,0 +1,272 @@
+/* ===== Milestone celebration banner ===== */
+.banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  border-radius: 24px;
+  min-height: 200px;
+  margin-bottom: 32px;
+}
+
+.blob {
+  position: absolute;
+  width: 384px;
+  height: 384px;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: sparkle 3s ease-in-out infinite;
+}
+.blobGold {
+  top: -128px;
+  left: -128px;
+  opacity: 0.4;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+}
+.blobSaffron {
+  bottom: -128px;
+  right: -128px;
+  opacity: 0.3;
+  background: radial-gradient(circle, var(--saffron) 0%, transparent 70%);
+  animation-delay: 1s;
+}
+
+.spark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--marigold);
+  animation: sparkle 2s ease-in-out infinite;
+}
+.spark1 { top: 32px; left: 33%; }
+.spark2 { top: 64px; right: 25%; background: var(--gold); animation-delay: 0.5s; }
+.spark3 { bottom: 48px; left: 50%; animation-delay: 1.5s; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.bannerInner {
+  position: relative;
+  padding: 32px;
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+.milestoneBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: rgba(212, 164, 55, 0.18);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.bannerTitle {
+  color: #fff;
+  font-weight: 700;
+  line-height: 0.95;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 12px;
+}
+.goldText {
+  color: var(--gold);
+}
+.bannerSubtitle {
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  margin-bottom: 12px;
+}
+.bannerBrush {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 16px;
+}
+.bannerBody {
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 28rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.bannerFigure {
+  display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.figureGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0.3;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 60%);
+  filter: blur(30px);
+}
+.bigNumber {
+  position: relative;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 4px 24px rgba(212, 164, 55, 0.4);
+}
+
+@media (min-width: 768px) {
+  .bannerInner {
+    padding: 48px;
+    grid-template-columns: 3fr 2fr;
+  }
+  .bannerFigure {
+    display: flex;
+  }
+  .bannerBody {
+    font-size: 16px;
+  }
+}
+
+/* ===== Section header ===== */
+.sectionHead {
+  margin-bottom: 24px;
+}
+.h1 {
+  font-weight: 700;
+  font-size: clamp(1.875rem, 5vw, 3rem);
+  margin-top: 8px;
+}
+
+/* ===== KPI grid ===== */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.kpi {
+  padding: 20px;
+}
+.kpiTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.kpiIcon {
+  color: var(--ink-muted);
+}
+.delta {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(7, 174, 174, 0.12);
+  color: var(--teal);
+}
+.kpiValue {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+.kpiLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+@media (min-width: 768px) {
+  .kpis {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .kpiValue {
+    font-size: 1.875rem;
+  }
+}
+
+/* ===== Panels: revenue chart + top earners ===== */
+.panels {
+  display: grid;
+  gap: 16px;
+}
+.panel {
+  padding: 24px;
+}
+.panelHead {
+  margin-bottom: 20px;
+}
+.panelTitle {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  margin-top: 4px;
+}
+.chartWrap {
+  height: 200px;
+}
+.chartSvg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .panels {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Top earners list */
+.earners {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.earner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rank {
+  font-weight: 700;
+  font-size: 1.5rem;
+  width: 24px;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.earnerInfo {
+  flex: 1;
+  min-width: 0;
+}
+.earnerName {
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.earnerCity {
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.earnerAmt {
+  font-weight: 700;
+  font-size: 14px;
+}

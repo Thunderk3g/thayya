@@ -1,0 +1,225 @@
+/* Instructor · Public Page preview */
+
+.head {
+  margin-bottom: 16px;
+}
+
+.handle {
+  font-weight: 700;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* ---- browser frame ---- */
+.frame {
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--p-line);
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--p-line-soft);
+  background: var(--p-bg-warm);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.url {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+/* ---- preview body ---- */
+.preview {
+  position: relative;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--p-bg-warm) 0%, #fff 60%);
+}
+
+.profileGrid {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 50%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.initials {
+  position: relative;
+  font-size: 60px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.profileInfo {
+  text-align: center;
+}
+
+.name {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 8px 0 12px;
+}
+
+.bio {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.star {
+  color: var(--saffron);
+}
+
+.dotSep {
+  color: var(--ink-muted);
+}
+
+.taught {
+  font-weight: 600;
+}
+
+/* ---- booking cards ---- */
+.bookTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.bookGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.bookCard {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--p-line);
+}
+
+.bookCardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.bookWhen {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+}
+
+.bookFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bookChip {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 38px;
+  }
+
+  .preview {
+    padding: 48px;
+  }
+
+  .profileGrid {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .avatar {
+    margin-inline: 0;
+  }
+
+  .initials {
+    font-size: 72px;
+  }
+
+  .profileInfo {
+    text-align: left;
+  }
+
+  .name {
+    font-size: 48px;
+  }
+
+  .bio {
+    font-size: 16px;
+  }
+
+  .statsRow {
+    justify-content: flex-start;
+  }
+
+  .bookTitle {
+    font-size: 24px;
+  }
+
+  .bookGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

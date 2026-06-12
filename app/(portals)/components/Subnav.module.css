@@ -1,0 +1,50 @@
+.nav {
+  position: sticky;
+  top: 73px;
+  z-index: 30;
+  background: var(--paper);
+  border-bottom: 1px solid var(--p-line);
+}
+
+.scroll {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .scroll {
+    padding-inline: 24px;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 4px;
+  padding-block: 8px;
+  min-width: max-content;
+}
+
+.pill {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.pill:hover {
+  color: var(--ink);
+  background: var(--p-line-soft);
+}
+.active,
+.active:hover {
+  background: var(--ink);
+  color: #fff;
+}

@@ -1,0 +1,115 @@
+/* ---------- page header ---------- */
+.head {
+  margin-bottom: 32px;
+}
+.kicker {
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+.title {
+  font-size: 32px;
+}
+
+/* ---------- group labels ---------- */
+.groupLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+}
+
+/* ---------- upcoming bookings ---------- */
+.upcomingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.upcomingRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+.dateBlock {
+  flex-shrink: 0;
+  width: 56px;
+  text-align: center;
+}
+.dateDay {
+  font-size: 30px;
+  line-height: 1;
+}
+.dateMonth {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.rowBody {
+  flex: 1;
+  min-width: 0;
+}
+.rowTitle {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rowMeta {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.rowPrice {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+/* ---------- past bookings ---------- */
+.pastList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0.7;
+}
+.pastRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+.pastDate {
+  flex-shrink: 0;
+  width: 56px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+.pastTitle {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pastPrice {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+  .rowTitle {
+    font-size: 18px;
+  }
+}
