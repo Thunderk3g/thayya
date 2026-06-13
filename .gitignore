@@ -6,3 +6,7 @@ out
 
 # runtime JSON data store (seeded on first run)
 /data/
+
+# crash dumps
+*.stackdump
+
