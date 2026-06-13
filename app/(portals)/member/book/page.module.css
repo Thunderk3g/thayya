@@ -1,3 +1,11 @@
+/* booking error message */
+.bookError {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--vermilion);
+  font-weight: 600;
+}
+
 /* ---------- back link ---------- */
 .back {
   display: inline-flex;

@@ -6,9 +6,41 @@ import { ChevronLeft, Play, PartyPopper } from "lucide-react";
 import { BOOK_WORKSHOP } from "../data";
 import styles from "./page.module.css";
 
+// The static book page demos the flagship workshop; its stable catalog id
+// lives in the data store (lib/db seed).
+const WORKSHOP_ID = "aaja-nachle-intensive";
+
 export default function BookWorkshopPage() {
   const [step, setStep] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
   const w = BOOK_WORKSHOP;
+
+  async function confirm() {
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ workshopId: WORKSHOP_ID }),
+      });
+      if (res.status === 401) {
+        // not signed in — send them to login, returning here afterwards
+        window.location.href = "/login?next=/member/book";
+        return;
+      }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Could not complete the booking.");
+      }
+      setStep(2);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <div className="p-wrap">
@@ -75,11 +107,13 @@ export default function BookWorkshopPage() {
 
                 <button
                   type="button"
-                  onClick={() => setStep(2)}
+                  onClick={confirm}
+                  disabled={submitting}
                   className={`p-grad-warm ${styles.confirmBtn}`}
                 >
-                  {w.confirmLabel}
+                  {submitting ? "Reserving…" : w.confirmLabel}
                 </button>
+                {error && <div className={styles.bookError}>{error}</div>}
                 <div className={styles.paymentNote}>{w.paymentNote}</div>
               </div>
             ) : (

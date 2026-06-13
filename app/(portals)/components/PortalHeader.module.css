@@ -32,6 +32,18 @@
   vertical-align: super;
 }
 
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  .right {
+    gap: 16px;
+  }
+}
+
 .roles {
   display: flex;
   align-items: center;
@@ -40,6 +52,94 @@
   border-radius: 999px;
   background: #fff;
   border: 1px solid var(--p-line);
+  flex-shrink: 0;
+}
+
+/* account area */
+.account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--saffron), var(--rani));
+}
+
+.accountInfo {
+  display: none;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+@media (min-width: 920px) {
+  .accountInfo {
+    display: flex;
+  }
+}
+.accountName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+}
+.roleChip {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.logoutBtn {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--p-line);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.logoutBtn:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.loginLink {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  transition: opacity 0.2s ease;
+}
+.loginLink:hover {
+  opacity: 0.85;
+}
+@media (min-width: 768px) {
+  .logoutBtn,
+  .loginLink {
+    font-size: 13px;
+    padding: 6px 16px;
+  }
 }
 
 .roleBtn {

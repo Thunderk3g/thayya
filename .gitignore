@@ -3,3 +3,6 @@ node_modules
 out
 .env*
 *.log
+
+# runtime JSON data store (seeded on first run)
+/data/

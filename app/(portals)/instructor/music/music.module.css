@@ -1,0 +1,407 @@
+/* Instructor · Music Library */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.subBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  padding: 6px 12px;
+}
+
+.blurb {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  max-width: 60ch;
+}
+
+/* ---- empty / no-instructor card ---- */
+.emptyCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+}
+
+.emptyIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.emptyRow {
+  padding: 20px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+/* ---- add track form ---- */
+.formCard {
+  padding: 20px;
+  margin-bottom: 36px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sectionHead .iconBtn {
+  margin-left: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--p-line);
+  background: #fff;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--vermilion);
+  margin: 0;
+}
+
+.submit {
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ---- section headers ---- */
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+
+.smallPill {
+  padding: 7px 14px;
+  font-size: 13px;
+  border: 1px solid var(--p-line);
+  cursor: pointer;
+}
+
+/* ---- track list ---- */
+.trackList {
+  overflow: hidden;
+  margin-bottom: 36px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--p-line-soft);
+}
+
+.track:last-child {
+  border-bottom: 0;
+}
+
+.trackIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.trackInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.trackTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.trackName {
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.trackMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+.trackSource {
+  color: var(--ink-muted);
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--p-line);
+  background: #fff;
+  color: var(--ink-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.iconBtn:hover {
+  color: var(--vermilion);
+  border-color: var(--vermilion);
+}
+
+/* ---- playlist builder ---- */
+.builder {
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.pickList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--p-line-soft);
+  cursor: pointer;
+}
+
+.pick:last-child {
+  border-bottom: 0;
+}
+
+.pickName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- playlists ---- */
+.playlistGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.playlist {
+  padding: 18px;
+}
+
+.playlistHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.playlistIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.playlistTitleWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.playlistName {
+  font-size: 19px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playlistCount {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.renameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlistActions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.playlistTracks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid var(--p-line-soft);
+  padding-top: 12px;
+}
+
+.miniTrack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.miniPlay {
+  color: var(--teal);
+  flex-shrink: 0;
+}
+
+.miniName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.miniDur {
+  color: var(--ink-muted);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.emptyMini {
+  font-size: 13px;
+  color: var(--ink-muted);
+  padding: 4px 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 44px;
+  }
+
+  .fieldGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .playlistGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

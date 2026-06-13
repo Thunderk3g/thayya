@@ -1,0 +1,210 @@
+.page {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+/* soft festival aurora accents */
+.aurora {
+  position: absolute;
+  top: -12%;
+  right: -8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 560px;
+  max-height: 560px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.4;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--violet), transparent 68%);
+  animation: aurora-drift 20s ease-in-out infinite alternate;
+}
+.aurora2 {
+  position: absolute;
+  bottom: -14%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 620px;
+  max-height: 620px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--saffron), var(--vermilion) 45%, transparent 70%);
+  animation: aurora-drift 24s ease-in-out infinite alternate-reverse;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(20, 16, 46, 0.12);
+  padding: 36px 32px 32px;
+}
+@media (min-width: 480px) {
+  .card {
+    padding: 44px 40px 38px;
+  }
+}
+
+.wordmark {
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+}
+.tm {
+  font-size: 12px;
+  vertical-align: super;
+}
+
+.overline {
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.heading {
+  margin-top: 6px;
+  margin-bottom: 26px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: 34px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.formFallback {
+  min-height: 420px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.input {
+  width: 100%;
+  padding: 13px 15px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.6;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(7, 174, 174, 0.22);
+}
+
+/* role toggle */
+.toggle {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+}
+.toggleBtn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.toggleBtn:hover {
+  color: var(--ink);
+}
+.toggleActive,
+.toggleActive:hover {
+  color: #fff;
+  background: linear-gradient(120deg, var(--saffron), var(--vermilion) 45%, var(--rani) 100%);
+  box-shadow: 0 6px 18px rgba(240, 66, 38, 0.3);
+}
+
+.error {
+  margin: -4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vermilion);
+}
+
+.submit {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(
+    110deg,
+    var(--saffron),
+    var(--vermilion) 35%,
+    var(--rani) 70%,
+    var(--violet)
+  );
+  background-size: 220% 220%;
+  box-shadow: 0 8px 28px rgba(240, 66, 38, 0.35);
+  transition: transform var(--dur-micro) var(--ease-beat),
+    box-shadow 0.3s ease, background-position 0.5s ease;
+}
+.submit:hover:not(:disabled) {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(189, 35, 162, 0.45);
+}
+.submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.switch {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--ink-soft);
+}

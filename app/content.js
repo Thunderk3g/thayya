@@ -6,7 +6,7 @@ export const HERO = {
   gradientWordIndex: 1,
   sub: "Movement rooted in Indian rhythms. Find your beat, your people, your power — one class at a time.",
   primaryCta: { label: "Book a class", href: "/member/discover" },
-  secondaryCta: { label: "Become an instructor", href: "#journey" },
+  secondaryCta: { label: "Become an instructor", href: "/signup?role=instructor" },
   marginalia: "தை யா — rhythm of the south",
   stats: [
     { value: 40, suffix: "+", label: "cities" },
