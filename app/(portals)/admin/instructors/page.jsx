@@ -1,14 +1,10 @@
 import { BadgeCheck } from "lucide-react";
 import { listInstructors } from "../../../../lib/db";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin · Instructors — Thayya™" };
-
-function initials(name) {
-  const parts = String(name || "").trim().split(/\s+/);
-  return ((parts[0]?.[0] || "") + (parts[1]?.[0] || "")).toUpperCase() || "—";
-}
 
 export default async function AdminInstructorsPage() {
   const rows = await listInstructors();
@@ -26,9 +22,9 @@ export default async function AdminInstructorsPage() {
             <div className={styles.meta}>No instructors registered yet.</div>
           </div>
         ) : (
-          rows.map((row, i) => (
+          rows.map((row) => (
             <div key={row.id} className={styles.row}>
-              <div className={`p-av-${(i % 6) + 1} ${styles.avatar}`}>{initials(row.name)}</div>
+              <Avatar seed={row.instructorId || row.id} name={row.name} size={48} />
               <div className={styles.info}>
                 <div className={styles.nameRow}>
                   <span className={styles.name}>{row.name}</span>

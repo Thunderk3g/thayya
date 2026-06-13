@@ -9,6 +9,7 @@ import {
 } from "../../../../lib/db";
 import FollowButton from "./FollowButton";
 import ReferButton from "./ReferButton";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -16,16 +17,6 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Instructor · Thayya™",
 };
-
-function initialsOf(name) {
-  return String(name || "")
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0] || "")
-    .join("")
-    .toUpperCase();
-}
 
 function splitName(name) {
   const parts = String(name || "").trim().split(/\s+/);
@@ -81,11 +72,14 @@ export default async function InstructorPage({ searchParams }) {
 
       {/* Profile header */}
       <div className={styles.profile}>
-        <div className={`p-av-1 ${styles.portrait}`}>
+        <div className={styles.portrait}>
+          <Avatar
+            fill
+            seed={profile.instructorId}
+            name={profile.name}
+            rounded="squircle"
+          />
           <span className="grain" aria-hidden="true" />
-          <span className={`p-display ${styles.portraitInitials}`}>
-            {initialsOf(profile.name)}
-          </span>
           {profile.verified ? (
             <span className={styles.certified}>
               <BadgeCheck size={12} className={styles.certifiedIcon} /> Certified

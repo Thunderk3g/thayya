@@ -2,14 +2,8 @@
 
 import { useState } from "react";
 import { Filter, Search } from "lucide-react";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
-
-function initialsOf(name) {
-  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
-  if (!parts.length) return "··";
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-}
 
 function lastAttended(ms) {
   if (ms == null) return "No classes yet";
@@ -70,9 +64,10 @@ export default function StudentsClient({ rows, overline, title, filterLabel }) {
             {all.length === 0 ? "No students have booked your workshops yet." : "No matching students."}
           </div>
         ) : (
-          filtered.map((s, i) => (
+          filtered.map((s) => (
             <div key={s.userId} className={styles.row}>
-              <span className={`p-av-${(i % 6) + 1} ${styles.avatar}`}>{initialsOf(s.name)}</span>
+              <Avatar seed={s.userId} name={s.name} size={44} className={styles.avatar} />
+
               <div className={styles.info}>
                 <div className={styles.name}>{s.name}</div>
                 <div className={styles.last}>{lastAttended(s.lastAt)}</div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Play, Music, Check } from "lucide-react";
+import { Play, Check } from "lucide-react";
+import ClassArt from "../../../components/art/ClassArt";
 import styles from "./page.module.css";
 
 export default function LibraryClient({ videos, audio }) {
@@ -26,13 +27,9 @@ export default function LibraryClient({ videos, audio }) {
               className={`p-lift ${styles.videoCard}`}
               onClick={() => flash(id)}
             >
-              <div className={`p-av-${v.av} ${styles.thumb}`}>
+              <div className={styles.thumb}>
+                <ClassArt seed={v.title} label={v.title} play className={styles.thumbArt} />
                 <div className="grain" />
-                <div className={styles.playWrap}>
-                  <span className={styles.playCircle}>
-                    <Play size={20} fill="currentColor" />
-                  </span>
-                </div>
                 <div className={styles.thumbMeta}>
                   <span className={styles.levelBadge}>{v.level}</span>
                   <span className={styles.duration}>{v.duration}</span>
@@ -60,8 +57,8 @@ export default function LibraryClient({ videos, audio }) {
               className={styles.track}
               onClick={() => flash(id)}
             >
-              <span className={`p-av-${t.av} ${styles.trackIcon}`}>
-                <Music size={16} />
+              <span className={styles.trackIcon}>
+                <ClassArt seed={t.title} play />
               </span>
               <span className={styles.trackInfo}>
                 <span className={styles.trackName}>{t.title}</span>

@@ -1,6 +1,7 @@
 import { Users, TrendingUp, IndianRupee, Sparkles, PartyPopper } from "lucide-react";
 import { getAdminKpis, getRevenueByMonth, getTopEarners } from "../../../../lib/db";
 import { OVERVIEW_HEADER } from "../data";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -8,11 +9,6 @@ export const metadata = { title: "Admin · Overview — Thayya™" };
 
 function rupees(n) {
   return `₹${(Number(n) || 0).toLocaleString("en-IN")}`;
-}
-
-function initials(name) {
-  const parts = String(name || "").trim().split(/\s+/);
-  return ((parts[0]?.[0] || "") + (parts[1]?.[0] || "")).toUpperCase() || "—";
 }
 
 // Dot colour walks the brand palette like the prototype chart.
@@ -167,7 +163,7 @@ export default async function AdminOverviewPage() {
               earners.map((row, i) => (
                 <div key={row.instructorId} className={styles.earner}>
                   <div className={`p-display ${styles.rank}`}>{i + 1}</div>
-                  <div className={`p-av-${(i % 6) + 1} ${styles.avatar}`}>{initials(row.name)}</div>
+                  <Avatar seed={row.instructorId} name={row.name} size={40} />
                   <div className={styles.earnerInfo}>
                     <div className={styles.earnerName}>{row.name}</div>
                     <div className={styles.earnerCity}>{row.city}</div>

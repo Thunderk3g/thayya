@@ -19,6 +19,7 @@ export default function Film() {
   const clipRef = useRef(null);
   const videoRef = useRef(null);
   const [showPlay, setShowPlay] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -124,6 +125,23 @@ export default function Film() {
           <div className={styles.frameGlow} aria-hidden="true" />
           <div className={styles.clip} ref={clipRef}>
             <div className={`gopuram-corner ${styles.frame}`}>
+              {/* branded poster shown until the film actually plays */}
+              <img
+                src="/film-poster.svg"
+                alt=""
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: playing ? 0 : 1,
+                  transition: "opacity 0.6s ease",
+                  pointerEvents: "none",
+                  zIndex: 1,
+                }}
+              />
               <video
                 ref={videoRef}
                 className={styles.video}
@@ -132,6 +150,7 @@ export default function Film() {
                 playsInline
                 autoPlay
                 preload="none"
+                onPlaying={() => setPlaying(true)}
               />
               {showPlay && (
                 <button

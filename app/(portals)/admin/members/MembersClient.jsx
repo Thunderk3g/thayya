@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
 
 function joined(ms) {
@@ -63,7 +64,10 @@ export default function MembersClient({ initialMembers }) {
         ) : (
           filtered.map((m) => (
             <div key={m.id} className={styles.gridRow}>
-              <div className={styles.nameCell}>{m.name}</div>
+              <div className={styles.nameCell} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <Avatar seed={m.id} name={m.name} size={40} />
+                {m.name}
+              </div>
               <div className={`${styles.cellHide} ${styles.metaText}`}>{m.email}</div>
               <div className={`p-display ${styles.cellRight} ${styles.points}`}>{m.points}</div>
               <div className={`${styles.cellHide} ${styles.metaText}`}>{m.city || "—"}</div>

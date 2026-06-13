@@ -6,6 +6,7 @@ import {
   searchUpcomingWorkshops,
   listInstructorsForDiscover,
 } from "../../../../lib/db";
+import Avatar from "../../../components/art/Avatar";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -13,16 +14,6 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Discover · Thayya™",
 };
-
-function initialsOf(name) {
-  return String(name || "")
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0] || "")
-    .join("")
-    .toUpperCase();
-}
 
 export default async function DiscoverPage({ searchParams }) {
   const sp = (await searchParams) || {};
@@ -76,18 +67,21 @@ export default async function DiscoverPage({ searchParams }) {
         </div>
 
         <div className={styles.instructorGrid}>
-          {instructors.map((person, i) => (
+          {instructors.map((person) => (
             <Link
               key={person.instructorId}
               href={`/member/instructor?id=${person.instructorId}`}
               className={`p-lift ${styles.instructorCard}`}
             >
-              <span className={`p-av-${(i % 6) + 1} ${styles.tile}`}>
+              <span className={styles.tile}>
+                <Avatar
+                  fill
+                  seed={person.instructorId}
+                  name={person.name}
+                  rounded="squircle"
+                />
                 <span className="grain" aria-hidden="true" />
                 <span className={styles.tileTag}>{person.style}</span>
-                <span className={`p-display ${styles.tileInitials}`}>
-                  {initialsOf(person.name)}
-                </span>
                 <span className={styles.tileMeta}>
                   <span className={styles.tileRating}>
                     <Star size={12} fill="currentColor" /> {person.rating || "—"}
@@ -126,16 +120,18 @@ export default async function DiscoverPage({ searchParams }) {
           </div>
         ) : (
           <div className={styles.rows}>
-            {workshops.map((w, i) => (
+            {workshops.map((w) => (
               <Link
                 key={w.id}
                 href={`/member/book?workshopId=${w.id}`}
                 className={`p-card p-lift ${styles.row}`}
               >
-                <span
-                  className={`p-av-${(i % 6) + 1} p-display ${styles.rowAvatar}`}
-                >
-                  {initialsOf(w.instructor)}
+                <span className={styles.rowAvatar}>
+                  <Avatar
+                    seed={w.instructor || w.title}
+                    name={w.instructor}
+                    size={48}
+                  />
                 </span>
                 <span className={styles.rowBody}>
                   <span className={`p-display ${styles.rowTitle}`}>

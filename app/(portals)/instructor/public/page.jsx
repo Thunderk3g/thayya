@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import { getCurrentUser } from "../../../../lib/auth";
 import { findUserById, listWorkshopsForInstructor } from "../../../../lib/db";
+import Avatar from "../../../components/art/Avatar";
 import { PUBLIC_PAGE } from "../data";
 import styles from "./page.module.css";
 
@@ -20,13 +21,6 @@ function whenLabel(w) {
     }
   }
   return [w.date, w.time].filter(Boolean).join(" · ") || "Date to be announced";
-}
-
-function initialsOf(name) {
-  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
-  if (!parts.length) return "··";
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
 export default async function InstructorPublic() {
@@ -69,9 +63,9 @@ export default async function InstructorPublic() {
         <div className={styles.preview}>
           <div className="grain" />
           <div className={styles.profileGrid}>
-            <div className={`p-av-1 ${styles.avatar}`}>
+            <div className={styles.avatar}>
+              <Avatar fill seed={instructorId} name={name} rounded="squircle" />
               <div className="grain" />
-              <span className={`p-display ${styles.initials}`}>{initialsOf(name)}</span>
             </div>
             <div className={styles.profileInfo}>
               <div className="p-overline">{overline}</div>

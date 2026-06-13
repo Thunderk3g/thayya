@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, Play, PartyPopper } from "lucide-react";
+import { ChevronLeft, PartyPopper } from "lucide-react";
+import ClassArt from "../../../components/art/ClassArt";
 import styles from "./page.module.css";
 
 const TAGS = ["90 minutes", "All levels", "Bring water", "AC studio"];
@@ -66,14 +67,12 @@ export default function BookClient({ workshop }) {
 
           <button
             type="button"
-            className={`p-av-1 ${styles.preview}`}
+            className={styles.preview}
             onClick={() => setPreviewNote(true)}
             aria-label="Workshop preview"
           >
+            <ClassArt seed={w.id} label={w.title} play />
             <span className="grain" aria-hidden="true" />
-            <span className={styles.playBtn}>
-              <Play size={28} fill="#fff" className={styles.playIcon} />
-            </span>
             <span className={styles.previewLabel}>
               {previewNote ? "Preview coming soon" : "Preview"}
             </span>
