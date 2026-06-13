@@ -109,6 +109,14 @@
   font-weight: 700;
 }
 
+.comingSoon {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--teal);
+}
+
 /* ---- audio library ---- */
 .audioHead {
   margin-bottom: 24px;

@@ -64,6 +64,67 @@
   color: var(--teal);
 }
 
+/* Adjust-split form */
+.splitForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+.input {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--p-line-soft);
+  background: var(--p-surface, #fff);
+  font: inherit;
+  color: inherit;
+  max-width: 160px;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--rani);
+}
+.splitHint {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.error {
+  font-size: 13px;
+  color: var(--vermilion);
+}
+.splitActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.submit {
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+.ghostBtn {
+  cursor: pointer;
+}
+.queueActions {
+  display: flex;
+  gap: 8px;
+}
+.queueBtn {
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
 .queueCard {
   overflow: hidden;
 }

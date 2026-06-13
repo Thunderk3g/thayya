@@ -1,24 +1,56 @@
 import { Users, TrendingUp, IndianRupee, Sparkles, PartyPopper } from "lucide-react";
-import { MILESTONE, OVERVIEW_HEADER, KPIS, REVENUE_CHART, TOP_EARNERS } from "../data";
+import { getAdminKpis, getRevenueByMonth, getTopEarners } from "../../../../lib/db";
+import { OVERVIEW_HEADER } from "../data";
 import styles from "./page.module.css";
 
-const KPI_ICONS = {
-  users: Users,
-  "trending-up": TrendingUp,
-  "indian-rupee": IndianRupee,
-  sparkles: Sparkles,
-};
-
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin · Overview — Thayya™" };
 
-export default function AdminOverviewPage() {
-  const pts = REVENUE_CHART.points;
+function rupees(n) {
+  return `₹${(Number(n) || 0).toLocaleString("en-IN")}`;
+}
+
+function initials(name) {
+  const parts = String(name || "").trim().split(/\s+/);
+  return ((parts[0]?.[0] || "") + (parts[1]?.[0] || "")).toUpperCase() || "—";
+}
+
+// Dot colour walks the brand palette like the prototype chart.
+const DOT_COLORS = ["var(--saffron)", "var(--saffron)", "var(--vermilion)", "var(--vermilion)", "var(--rani)", "var(--teal)"];
+
+export default async function AdminOverviewPage() {
+  const [kpis, revenue, earners] = await Promise.all([
+    getAdminKpis(),
+    getRevenueByMonth(6),
+    getTopEarners(4),
+  ]);
+
+  // KPI cards — real aggregates, no fabricated deltas.
+  const kpiCards = [
+    { Icon: Users, value: String(kpis.instructors), label: "Active Instructors" },
+    { Icon: TrendingUp, value: rupees(kpis.gmvThisMonth), label: "Revenue · this month" },
+    { Icon: IndianRupee, value: rupees(kpis.gmvAllTime), label: "GMV All Time" },
+    { Icon: Sparkles, value: String(kpis.members), label: "End Users" },
+  ];
+
+  // Revenue chart geometry: map real monthly totals onto the existing SVG.
+  // viewBox 0 0 600 200; x evenly spread, y from max total (higher = nearer top).
+  const maxTotal = Math.max(1, ...revenue.map((r) => r.total));
+  const stepX = revenue.length > 1 ? 540 / (revenue.length - 1) : 0;
+  const pts = revenue.map((r, i) => ({
+    x: 30 + i * stepX,
+    y: 170 - (r.total / maxTotal) * 110,
+    label: r.label,
+    dot: DOT_COLORS[i] || "var(--teal)",
+  }));
   const linePath = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
-  const fillPath = `${linePath} L ${pts[pts.length - 1].x} 180 L ${pts[0].x} 180 Z`;
+  const fillPath = pts.length
+    ? `${linePath} L ${pts[pts.length - 1].x} 180 L ${pts[0].x} 180 Z`
+    : "";
 
   return (
     <div className="p-wrap">
-      {/* Milestone celebration banner */}
+      {/* Milestone celebration banner — real instructor count */}
       <div className={styles.banner}>
         <div className={`${styles.blob} ${styles.blobGold}`} />
         <div className={`${styles.blob} ${styles.blobSaffron}`} />
@@ -29,18 +61,23 @@ export default function AdminOverviewPage() {
         <div className={styles.bannerInner}>
           <div>
             <div className={styles.milestoneBadge}>
-              <PartyPopper size={14} /> {MILESTONE.badge}
+              <PartyPopper size={14} /> Network Milestone
             </div>
             <h2 className={`p-display ${styles.bannerTitle}`}>
-              <span className={styles.goldText}>{MILESTONE.numberAccent}</span> {MILESTONE.numberWord}
+              <span className={styles.goldText}>{kpis.instructors}</span> Instructors
             </h2>
-            <h3 className={`p-display ${styles.bannerSubtitle}`}>{MILESTONE.subtitle}</h3>
-            <p className={`p-display display-italic gradient-text ${styles.bannerBrush}`}>{MILESTONE.brush}</p>
-            <p className={styles.bannerBody}>{MILESTONE.body}</p>
+            <h3 className={`p-display ${styles.bannerSubtitle}`}>Registered.</h3>
+            <p className={`p-display display-italic gradient-text ${styles.bannerBrush}`}>
+              The tribe is rising.
+            </p>
+            <p className={styles.bannerBody}>
+              Trained instructors are now ready to move with their tribes across the country. Every
+              new face grows the floor.
+            </p>
           </div>
           <div className={styles.bannerFigure}>
             <div className={styles.figureGlow} />
-            <div className={`p-display ${styles.bigNumber}`}>{MILESTONE.bigNumber}</div>
+            <div className={`p-display ${styles.bigNumber}`}>{kpis.instructors}</div>
           </div>
         </div>
       </div>
@@ -55,29 +92,25 @@ export default function AdminOverviewPage() {
         </h1>
       </div>
 
-      {/* KPIs */}
+      {/* KPIs — real aggregates, delta pills dropped (not reliably computable) */}
       <div className={styles.kpis}>
-        {KPIS.map((kpi) => {
-          const Icon = KPI_ICONS[kpi.icon];
-          return (
-            <div key={kpi.label} className={`p-card p-lift ${styles.kpi}`}>
-              <div className={styles.kpiTop}>
-                <Icon size={16} className={styles.kpiIcon} />
-                <span className={styles.delta}>{kpi.delta}</span>
-              </div>
-              <div className={`p-display ${styles.kpiValue}`}>{kpi.value}</div>
-              <div className={styles.kpiLabel}>{kpi.label}</div>
+        {kpiCards.map((kpi) => (
+          <div key={kpi.label} className={`p-card p-lift ${styles.kpi}`}>
+            <div className={styles.kpiTop}>
+              <kpi.Icon size={16} className={styles.kpiIcon} />
             </div>
-          );
-        })}
+            <div className={`p-display ${styles.kpiValue}`}>{kpi.value}</div>
+            <div className={styles.kpiLabel}>{kpi.label}</div>
+          </div>
+        ))}
       </div>
 
       {/* Revenue chart + Top earners */}
       <div className={styles.panels}>
         <div className={`p-card ${styles.panel}`}>
           <div className={styles.panelHead}>
-            <div className="p-overline">{REVENUE_CHART.overline}</div>
-            <h3 className={`p-display ${styles.panelTitle}`}>{REVENUE_CHART.title}</h3>
+            <div className="p-overline">Revenue · 6 months</div>
+            <h3 className={`p-display ${styles.panelTitle}`}>Trajectory</h3>
           </div>
           <div className={styles.chartWrap}>
             <svg viewBox="0 0 600 200" className={styles.chartSvg} role="img" aria-label="Revenue over the last six months">
@@ -93,7 +126,7 @@ export default function AdminOverviewPage() {
                   <stop offset="100%" style={{ stopColor: "var(--vermilion)", stopOpacity: 0 }} />
                 </linearGradient>
               </defs>
-              <path d={fillPath} fill="url(#admRevFill)" />
+              {fillPath ? <path d={fillPath} fill="url(#admRevFill)" /> : null}
               <path
                 d={linePath}
                 stroke="url(#admRevLine)"
@@ -103,11 +136,11 @@ export default function AdminOverviewPage() {
                 strokeLinejoin="round"
               />
               {pts.map((p) => (
-                <circle key={p.month} cx={p.x} cy={p.y} r="5" style={{ fill: p.dot }} />
+                <circle key={p.label} cx={p.x} cy={p.y} r="5" style={{ fill: p.dot }} />
               ))}
               {pts.map((p, i) => (
                 <text
-                  key={p.month}
+                  key={p.label}
                   x={p.x}
                   y="195"
                   textAnchor="middle"
@@ -115,7 +148,7 @@ export default function AdminOverviewPage() {
                   fontWeight={i === pts.length - 1 ? "600" : "400"}
                   style={{ fill: "var(--ink-muted)" }}
                 >
-                  {p.month}
+                  {p.label}
                 </text>
               ))}
             </svg>
@@ -124,21 +157,25 @@ export default function AdminOverviewPage() {
 
         <div className={`p-card ${styles.panel}`}>
           <div className={styles.panelHead}>
-            <div className="p-overline">{TOP_EARNERS.overline}</div>
-            <h3 className={`p-display ${styles.panelTitle}`}>{TOP_EARNERS.title}</h3>
+            <div className="p-overline">Top earners</div>
+            <h3 className={`p-display ${styles.panelTitle}`}>All time</h3>
           </div>
           <div className={styles.earners}>
-            {TOP_EARNERS.rows.map((row) => (
-              <div key={row.rank} className={styles.earner}>
-                <div className={`p-display ${styles.rank}`}>{row.rank}</div>
-                <div className={`p-av-${row.av} ${styles.avatar}`}>{row.initials}</div>
-                <div className={styles.earnerInfo}>
-                  <div className={styles.earnerName}>{row.name}</div>
-                  <div className={styles.earnerCity}>{row.city}</div>
+            {earners.length === 0 ? (
+              <div className={styles.earnerCity}>No bookings yet.</div>
+            ) : (
+              earners.map((row, i) => (
+                <div key={row.instructorId} className={styles.earner}>
+                  <div className={`p-display ${styles.rank}`}>{i + 1}</div>
+                  <div className={`p-av-${(i % 6) + 1} ${styles.avatar}`}>{initials(row.name)}</div>
+                  <div className={styles.earnerInfo}>
+                    <div className={styles.earnerName}>{row.name}</div>
+                    <div className={styles.earnerCity}>{row.city}</div>
+                  </div>
+                  <div className={`p-display ${styles.earnerAmt}`}>{rupees(row.share)}</div>
                 </div>
-                <div className={`p-display ${styles.earnerAmt}`}>{row.amount}</div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

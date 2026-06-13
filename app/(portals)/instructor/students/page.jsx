@@ -1,39 +1,23 @@
-import { Filter } from "lucide-react";
+import { getCurrentUser } from "../../../../lib/auth";
+import { listStudentsForInstructor } from "../../../../lib/db";
 import { STUDENTS } from "../data";
-import styles from "./page.module.css";
+import StudentsClient from "./StudentsClient";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "My Students · Instructor · Thayya™" };
 
-export default function InstructorStudents() {
-  const { overline, title, filter, rows } = STUDENTS;
+export default async function InstructorStudents() {
+  const user = await getCurrentUser();
+  const instructorId = user?.instructorId;
+
+  const rows = instructorId ? await listStudentsForInstructor(instructorId) : [];
 
   return (
-    <div className="p-wrap">
-      <header className={styles.head}>
-        <div>
-          <div className="p-overline">{overline}</div>
-          <h1 className={`p-display ${styles.title}`}>{title}</h1>
-        </div>
-        <button type="button" className={`p-pill p-pill-ghost ${styles.filterBtn}`}>
-          <Filter size={14} /> {filter}
-        </button>
-      </header>
-
-      <div className={`p-card ${styles.list}`}>
-        {rows.map((s) => (
-          <div key={s.initials} className={styles.row}>
-            <span className={`p-av-${s.av} ${styles.avatar}`}>{s.initials}</span>
-            <div className={styles.info}>
-              <div className={styles.name}>{s.name}</div>
-              <div className={styles.last}>{s.last}</div>
-            </div>
-            <div className={styles.right}>
-              <div className={`p-display ${styles.total}`}>{s.total}</div>
-              <div className={styles.classes}>{s.classes}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <StudentsClient
+      rows={rows}
+      overline={STUDENTS.overline}
+      title={STUDENTS.title}
+      filterLabel={STUDENTS.filter}
+    />
   );
 }

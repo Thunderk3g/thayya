@@ -1,13 +1,36 @@
 import Link from "next/link";
 import { Search, Star, ArrowRight, ChevronRight } from "lucide-react";
-import { DISCOVER, INSTRUCTORS, OPEN_SPOTS } from "../data";
+import { DISCOVER } from "../data";
+import {
+  listUpcomingWorkshops,
+  searchUpcomingWorkshops,
+  listInstructorsForDiscover,
+} from "../../../../lib/db";
 import styles from "./page.module.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Discover · Thayya™",
 };
 
-export default function DiscoverPage() {
+function initialsOf(name) {
+  return String(name || "")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0] || "")
+    .join("")
+    .toUpperCase();
+}
+
+export default async function DiscoverPage({ searchParams }) {
+  const sp = (await searchParams) || {};
+  const q = typeof sp.q === "string" ? sp.q : "";
+
+  const workshops = q ? await searchUpcomingWorkshops(q) : await listUpcomingWorkshops();
+  const instructors = await listInstructorsForDiscover();
+
   return (
     <div className="p-wrap">
       {/* Hero */}
@@ -23,18 +46,20 @@ export default function DiscoverPage() {
       </header>
 
       {/* Search */}
-      <div className={styles.search} role="search">
+      <form className={styles.search} role="search" method="get">
         <Search size={20} className={styles.searchIcon} aria-hidden="true" />
         <input
           className={styles.searchInput}
           type="search"
+          name="q"
+          defaultValue={q}
           placeholder={DISCOVER.searchPlaceholder}
           aria-label={DISCOVER.searchPlaceholder}
         />
-        <button type="button" className={`p-grad-warm ${styles.searchBtn}`}>
+        <button type="submit" className={`p-grad-warm ${styles.searchBtn}`}>
           Search
         </button>
-      </div>
+      </form>
 
       {/* Featured instructors */}
       <section className={styles.section}>
@@ -51,21 +76,21 @@ export default function DiscoverPage() {
         </div>
 
         <div className={styles.instructorGrid}>
-          {INSTRUCTORS.map((person) => (
+          {instructors.map((person, i) => (
             <Link
-              key={person.id}
-              href="/member/instructor"
+              key={person.instructorId}
+              href={`/member/instructor?id=${person.instructorId}`}
               className={`p-lift ${styles.instructorCard}`}
             >
-              <span className={`p-av-${person.av} ${styles.tile}`}>
+              <span className={`p-av-${(i % 6) + 1} ${styles.tile}`}>
                 <span className="grain" aria-hidden="true" />
-                <span className={styles.tileTag}>{person.tag}</span>
+                <span className={styles.tileTag}>{person.style}</span>
                 <span className={`p-display ${styles.tileInitials}`}>
-                  {person.initials}
+                  {initialsOf(person.name)}
                 </span>
                 <span className={styles.tileMeta}>
                   <span className={styles.tileRating}>
-                    <Star size={12} fill="currentColor" /> {person.rating}
+                    <Star size={12} fill="currentColor" /> {person.rating || "—"}
                   </span>
                   <span>{person.city}</span>
                 </span>
@@ -85,49 +110,60 @@ export default function DiscoverPage() {
           <div>
             <div className="p-overline">{DISCOVER.openSpotsKicker}</div>
             <h2 className={`p-display ${styles.sectionTitle}`}>
-              {DISCOVER.openSpotsTitle}
+              {q ? `Results for “${q}”` : DISCOVER.openSpotsTitle}
             </h2>
           </div>
         </div>
 
-        <div className={styles.rows}>
-          {OPEN_SPOTS.map((workshop) => (
-            <Link
-              key={workshop.title}
-              href="/member/book"
-              className={`p-card p-lift ${styles.row}`}
-            >
-              <span
-                className={`p-av-${workshop.av} p-display ${styles.rowAvatar}`}
+        {workshops.length === 0 ? (
+          <div className={`p-card ${styles.row}`}>
+            <span className={styles.rowBody}>
+              <span className={styles.rowMeta}>
+                No workshops match that search yet — try a different name or
+                style.
+              </span>
+            </span>
+          </div>
+        ) : (
+          <div className={styles.rows}>
+            {workshops.map((w, i) => (
+              <Link
+                key={w.id}
+                href={`/member/book?workshopId=${w.id}`}
+                className={`p-card p-lift ${styles.row}`}
               >
-                {workshop.initials}
-              </span>
-              <span className={styles.rowBody}>
-                <span className={`p-display ${styles.rowTitle}`}>
-                  {workshop.title}
-                </span>
-                <span className={styles.rowMeta}>{workshop.meta}</span>
-              </span>
-              <span className={styles.rowRight}>
-                <span className={`p-display gradient-text ${styles.rowPrice}`}>
-                  {workshop.price}
-                </span>
                 <span
-                  className={
-                    workshop.urgent ? styles.spotsUrgent : styles.spotsOk
-                  }
+                  className={`p-av-${(i % 6) + 1} p-display ${styles.rowAvatar}`}
                 >
-                  {workshop.spots}
+                  {initialsOf(w.instructor)}
                 </span>
-              </span>
-              <ChevronRight
-                size={16}
-                className={styles.rowChevron}
-                aria-hidden="true"
-              />
-            </Link>
-          ))}
-        </div>
+                <span className={styles.rowBody}>
+                  <span className={`p-display ${styles.rowTitle}`}>
+                    {w.title}
+                  </span>
+                  <span className={styles.rowMeta}>
+                    {w.instructor} · {w.date} · {w.time}
+                  </span>
+                </span>
+                <span className={styles.rowRight}>
+                  <span className={`p-display gradient-text ${styles.rowPrice}`}>
+                    ₹{w.price.toLocaleString("en-IN")}
+                  </span>
+                  <span
+                    className={w.spotsLeft <= 5 ? styles.spotsUrgent : styles.spotsOk}
+                  >
+                    {w.spotsLeft} spots left
+                  </span>
+                </span>
+                <ChevronRight
+                  size={16}
+                  className={styles.rowChevron}
+                  aria-hidden="true"
+                />
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

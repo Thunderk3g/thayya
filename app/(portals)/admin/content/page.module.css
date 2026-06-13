@@ -21,6 +21,76 @@
   overflow: hidden;
 }
 
+/* New-drop + inline-edit form */
+.formCard {
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+.input {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--p-line-soft);
+  background: var(--p-surface, #fff);
+  font: inherit;
+  color: inherit;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--rani);
+}
+.error {
+  font-size: 13px;
+  color: var(--vermilion);
+  margin-bottom: 12px;
+}
+.submit {
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+.ghostBtn {
+  cursor: pointer;
+}
+.editRow {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--p-line-soft);
+}
+.editActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vermilion);
+}
+
 /* Mobile: Drop / Status / Actions thirds. Desktop: 4/2/2/2/2 like the prototype 12-col grid. */
 .gridRow {
   display: grid;
@@ -98,5 +168,12 @@
   }
   .dropName {
     font-size: 1.125rem;
+  }
+  .formGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .editRow {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

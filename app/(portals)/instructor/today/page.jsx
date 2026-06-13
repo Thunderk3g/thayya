@@ -1,19 +1,43 @@
 import Link from "next/link";
 import { Play, ArrowUpRight, Star } from "lucide-react";
+import { getCurrentUser } from "../../../../lib/auth";
+import { getInstructorToday } from "../../../../lib/db";
 import { TODAY } from "../data";
 import styles from "./page.module.css";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Today · Instructor · Thayya™" };
 
-export default function InstructorToday() {
-  const { dateline, greeting, drop, nextWorkshop, month, stats } = TODAY;
+function fmtRupees(n) {
+  return `₹${(Number(n) || 0).toLocaleString("en-IN")}`;
+}
+
+export default async function InstructorToday() {
+  const { dateline, greeting, drop } = TODAY;
+  const user = await getCurrentUser();
+  const instructorId = user?.instructorId;
+
+  const data = instructorId
+    ? await getInstructorToday(instructorId)
+    : { nextWorkshop: null, monthEarnings: 0, activeStudents: 0, workshopsThisMonth: 0 };
+
+  const firstName = (user?.name || greeting.name).split(" ")[0];
+  const next = data.nextWorkshop;
+
+  const tiles = [
+    { value: String(data.activeStudents), label: "Active students" },
+    { value: String(data.workshopsThisMonth), label: "Workshops this month" },
+  ];
+  if (user?.rating) {
+    tiles.push({ value: String(user.rating), label: "Avg rating", star: true });
+  }
 
   return (
     <div className="p-wrap">
       <header className={styles.head}>
         <div className="p-overline">{dateline}</div>
         <h1 className={`p-display ${styles.title}`}>
-          {greeting.lead} <span className="gradient-text">{greeting.name}</span>.
+          {greeting.lead} <span className="gradient-text">{firstName}</span>.
           <br />
           <span className={`display-italic gradient-text ${styles.brush}`}>
             {greeting.brush}
@@ -49,30 +73,49 @@ export default function InstructorToday() {
       <section className={styles.statsGrid}>
         <div className={`p-card ${styles.nextCard}`}>
           <div className={styles.nextHead}>
-            <div className="p-overline">{nextWorkshop.label}</div>
-            <span className="p-badge p-badge-hot">{nextWorkshop.badge}</span>
+            <div className="p-overline">Next Workshop</div>
+            {next ? (
+              <span className="p-badge p-badge-hot">{next.fillPct}% full</span>
+            ) : null}
           </div>
-          <div className={`p-display ${styles.nextTitle}`}>{nextWorkshop.title}</div>
-          <div className={styles.nextMeta}>{nextWorkshop.meta}</div>
-          <div className={styles.track}>
-            <div
-              className={`p-grad-warm ${styles.fill}`}
-              style={{ width: `${nextWorkshop.fillPct}%` }}
-            />
-          </div>
+          {next ? (
+            <>
+              <div className={`p-display ${styles.nextTitle}`}>{next.title}</div>
+              <div className={styles.nextMeta}>
+                {next.time}
+                {next.venue ? ` at ${next.venue}` : ""} · {next.bookedCount} of{" "}
+                {next.capacity} booked
+              </div>
+              <div className={styles.track}>
+                <div
+                  className={`p-grad-warm ${styles.fill}`}
+                  style={{ width: `${next.fillPct}%` }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={`p-display ${styles.nextTitle}`}>No upcoming workshop</div>
+              <div className={styles.nextMeta}>
+                Schedule a new workshop to start filling seats.
+              </div>
+            </>
+          )}
         </div>
         <div className={`p-card ${styles.monthCard}`}>
-          <div className="p-overline">{month.label}</div>
-          <div className={`p-display gradient-text ${styles.monthAmount}`}>{month.amount}</div>
+          <div className="p-overline">This Month</div>
+          <div className={`p-display gradient-text ${styles.monthAmount}`}>
+            {fmtRupees(data.monthEarnings)}
+          </div>
           <div className={styles.monthDelta}>
-            <ArrowUpRight size={12} /> {month.delta}
+            <ArrowUpRight size={12} /> Your 70% share
           </div>
         </div>
       </section>
 
       {/* Quick stat tiles */}
       <section className={styles.tiles}>
-        {stats.map((s) => (
+        {tiles.map((s) => (
           <div key={s.label} className={`p-card ${styles.tile}`}>
             <div className={`p-display ${styles.tileValue}`}>
               {s.value}

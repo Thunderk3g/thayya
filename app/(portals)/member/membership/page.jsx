@@ -1,13 +1,57 @@
-import { Award, Heart, Sparkles, ArrowRight } from "lucide-react";
+import { Award, Heart, Sparkles } from "lucide-react";
 import { MEMBERSHIP } from "../data";
+import { getCurrentUser } from "../../../../lib/auth";
+import { referralCode } from "../../../../lib/db";
+import ReferCodeButton from "./ReferCodeButton";
+import UpgradeButton from "./UpgradeButton";
 import styles from "./page.module.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Membership · Thayya™",
 };
 
-export default function MembershipPage() {
+// ₹0.5 of redeemable credit per loyalty point.
+const CREDIT_PER_POINT = 0.5;
+
+// Ascending tiers; a member sits in the highest tier whose `min` they have met.
+const TIERS = [
+  { name: "Anklet Tier", min: 0 },
+  { name: "Marigold Tier", min: 1000 },
+  { name: "Tabla Tier", min: 2000 },
+  { name: "Maestro Tier", min: 4000 },
+];
+
+function tierFor(points) {
+  let current = TIERS[0];
+  let next = null;
+  for (let i = 0; i < TIERS.length; i++) {
+    if (points >= TIERS[i].min) {
+      current = TIERS[i];
+      next = TIERS[i + 1] || null;
+    }
+  }
+  if (!next) {
+    return { current, next: null, progress: 100, toNext: 0 };
+  }
+  const span = next.min - current.min;
+  const into = points - current.min;
+  const progress = span > 0 ? Math.min(100, Math.round((into / span) * 100)) : 0;
+  return { current, next, progress, toNext: Math.max(0, next.min - points) };
+}
+
+function rupees(n) {
+  return `₹${Number(n || 0).toLocaleString("en-IN")}`;
+}
+
+export default async function MembershipPage() {
   const m = MEMBERSHIP;
+  const user = await getCurrentUser();
+  const points = Number(user?.points || 0);
+  const credit = Math.round(points * CREDIT_PER_POINT);
+  const { current, next, progress, toNext } = tierFor(points);
+  const code = referralCode(user);
 
   return (
     <div className="p-wrap">
@@ -23,7 +67,9 @@ export default function MembershipPage() {
         <div className={styles.loyaltyInner}>
           <div className={styles.loyaltyTop}>
             <div>
-              <div className={styles.loyaltyTier}>{m.loyalty.tier}</div>
+              <div className={styles.loyaltyTier}>
+                Thayya Member · {current.name}
+              </div>
               <div
                 className={`p-display display-italic gradient-text ${styles.loyaltyTagline}`}
               >
@@ -32,17 +78,27 @@ export default function MembershipPage() {
             </div>
             <Award className={styles.awardIcon} aria-hidden="true" />
           </div>
-          <div className={`p-display ${styles.points}`}>{m.loyalty.points}</div>
-          <div className={styles.pointsNote}>{m.loyalty.pointsNote}</div>
+          <div className={`p-display ${styles.points}`}>
+            {points.toLocaleString("en-IN")}
+          </div>
+          <div className={styles.pointsNote}>
+            loyalty points · {rupees(credit)} redeemable credit
+          </div>
           <div className={styles.progressTrack}>
             <div
               className={`p-grad ${styles.progressFill}`}
-              style={{ width: `${m.loyalty.progress}%` }}
+              style={{ width: `${progress}%` }}
             />
           </div>
           <div className={styles.nextTier}>
-            <strong>{m.loyalty.nextTierPoints}</strong> to{" "}
-            <strong>{m.loyalty.nextTierName}</strong>
+            {next ? (
+              <>
+                <strong>{toNext.toLocaleString("en-IN")} points</strong> to{" "}
+                <strong>{next.name}</strong>
+              </>
+            ) : (
+              <strong>Top tier reached — enjoy the perks.</strong>
+            )}
           </div>
         </div>
       </div>
@@ -53,9 +109,7 @@ export default function MembershipPage() {
           <Heart size={24} className={styles.heartIcon} aria-hidden="true" />
           <div className={`p-display ${styles.cardTitle}`}>{m.refer.title}</div>
           <div className={styles.cardBody}>{m.refer.body}</div>
-          <button type="button" className={styles.referBtn}>
-            {m.refer.cta} <ArrowRight size={16} />
-          </button>
+          <ReferCodeButton code={code} />
         </div>
 
         <div className={`p-grad-border p-lift ${styles.card} ${styles.cardUpgrade}`}>
@@ -64,9 +118,7 @@ export default function MembershipPage() {
             {m.upgrade.title}
           </div>
           <div className={styles.cardBody}>{m.upgrade.body}</div>
-          <button type="button" className={`p-grad-warm ${styles.upgradeBtn}`}>
-            {m.upgrade.cta} <ArrowRight size={16} />
-          </button>
+          <UpgradeButton />
         </div>
       </div>
     </div>

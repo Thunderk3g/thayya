@@ -20,6 +20,79 @@
   padding: 10px 16px;
 }
 
+/* ---- new workshop form ---- */
+.formCard {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--p-line);
+  background: #fff;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--vermilion);
+  margin: 0;
+}
+
+.submit {
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.empty {
+  padding: 20px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -106,6 +179,10 @@
 @media (min-width: 768px) {
   .title {
     font-size: 48px;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .item {
