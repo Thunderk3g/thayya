@@ -92,18 +92,6 @@ export default function Hero() {
         "fade+=0.5"
       );
 
-      // parallax: the echo drifts slower than the scroll (A5)
-      gsap.to("[data-hero-echo]", {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
       play = () => tl.play();
     }, sectionRef);
 
@@ -157,15 +145,6 @@ export default function Hero() {
       />
 
       <div className={`wrap ${styles.inner}`}>
-        {/* outlined echo of the wordmark, drifting behind the h1 (A5) */}
-        <div
-          className={`display ${styles.echo}`}
-          data-hero-echo
-          data-hero-ambient
-          aria-hidden="true"
-        >
-          Thayya
-        </div>
 
         <h1 className={`display ${styles.title}`}>
           {HERO.words.map((word, i) => (
