@@ -6,7 +6,7 @@ import styles from "./Loader.module.css";
 /**
  * First-visit overture (Thayya Loader.dc.html — A+B fusion).
  * A self-drawing gradient kolam (epitrochoid) draws itself while the count-in
- * rolls 0→100 and the konnakol syllables தை → யா → தக → திமி strike on the beat.
+ * rolls 1→100 (gradient numerals) and the beats pulse on the konnakol count.
  * On the "sam" (~1.6s) a 12-fold rangoli blooms, light + sparks burst, then the
  * cream curtain lifts away. Signals the hero via `window.__thayyaRevealed` and
  * the `thayya:reveal` event at the start of the lift, so the hero crosses in
@@ -71,7 +71,6 @@ function bez(x, x1, y1, x2, y2) {
 const easeBeat = (t) => bez(clamp(t), 0.62, 0.05, 0.01, 0.99);
 
 const T = { still: 190, countEnd: 1810, samEnd: 2130, total: 3000 };
-const SYLLABLES = ["தை", "யா", "தக", "திமி"];
 const KOLAM1_D = epitrochoid(8, 3, 4.6, 150, 720, 0);
 const RANGOLI_HTML = buildRangoli();
 const SPARKS_HTML = buildSparks();
@@ -80,7 +79,7 @@ const GRAIN = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/sv
 export default function Loader() {
   const [active, setActive] = useState(true);
   const root = useRef(null);
-  const syllable = useRef(null);
+  const counter = useRef(null);
   const kolam1 = useRef(null), kolamSvg = useRef(null);
   const auroraA = useRef(null), auroraB = useRef(null);
   const bloom = useRef(null), rangoli = useRef(null), sparks = useRef(null);
@@ -97,7 +96,7 @@ export default function Loader() {
     if (reduced) { reveal(); setActive(false); return; }
 
     const el = {
-      root: root.current, syllable: syllable.current,
+      root: root.current, counter: counter.current,
       kolam1: kolam1.current, kolamSvg: kolamSvg.current,
       auroraA: auroraA.current, auroraB: auroraB.current,
       bloom: bloom.current, rangoli: rangoli.current, sparks: sparks.current,
@@ -118,9 +117,8 @@ export default function Loader() {
       // konnakol beats (4 strikes across the build)
       const span = T.countEnd - T.still; let beat = 0;
       for (let k = 0; k < 4; k++) { const tb = T.still + k * span / 4; if (t >= tb) { const e = Math.exp(-(t - tb) / 150); if (e > beat) beat = e; } }
-      const si = Math.max(0, Math.min(3, Math.floor(cp * 3.9999)));
-      el.syllable.textContent = SYLLABLES[si];
-      el.syllable.style.transform = "scale(" + (1 + 0.24 * beat) + ")";
+      el.counter.textContent = Math.round(1 + 99 * draw);
+      el.counter.style.transform = "scale(" + (1 + 0.06 * beat) + ")";
 
       // the sam (strike)
       const sam = C((t - T.countEnd) / (T.samEnd - T.countEnd));
@@ -221,18 +219,23 @@ export default function Loader() {
         <g ref={sparks} style={{ opacity: 0 }} dangerouslySetInnerHTML={{ __html: SPARKS_HTML }} />
       </svg>
 
-      {/* konnakol count-in — syllable only (no numerals) */}
+      {/* count-in numerals (1 → 100) */}
       <div
         style={{
           position: "absolute", zIndex: 3, left: "50%", top: "50%", transform: "translate(-50%,-50%)",
-          display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", pointerEvents: "none",
+          display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", pointerEvents: "none",
         }}
       >
-        <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "11px", letterSpacing: "0.42em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "10px" }}>
-          Count-in
-        </span>
-        <span ref={syllable} style={{ fontFamily: "var(--font-tamil)", fontWeight: 500, fontSize: "clamp(40px,6vw,72px)", lineHeight: 1, color: "var(--ink)", minHeight: "1.1em" }}>
-          தை
+        <span
+          ref={counter}
+          style={{
+            fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(72px,10vw,140px)", lineHeight: 1,
+            letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums", background: "var(--thayya-gradient)",
+            backgroundSize: "300% 100%", WebkitBackgroundClip: "text", backgroundClip: "text",
+            WebkitTextFillColor: "transparent", animation: "thy-flow 4.5s linear infinite",
+          }}
+        >
+          1
         </span>
       </div>
 
