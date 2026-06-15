@@ -81,7 +81,7 @@ const GRAIN = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/sv
 export default function Loader() {
   const [active, setActive] = useState(true);
   const root = useRef(null);
-  const counter = useRef(null), syllable = useRef(null);
+  const syllable = useRef(null);
   const kolam1 = useRef(null), kolam2 = useRef(null), kolamSvg = useRef(null);
   const auroraA = useRef(null), auroraB = useRef(null);
   const bloom = useRef(null), rangoli = useRef(null), sparks = useRef(null);
@@ -98,7 +98,7 @@ export default function Loader() {
     if (reduced) { reveal(); setActive(false); return; }
 
     const el = {
-      root: root.current, counter: counter.current, syllable: syllable.current,
+      root: root.current, syllable: syllable.current,
       kolam1: kolam1.current, kolam2: kolam2.current, kolamSvg: kolamSvg.current,
       auroraA: auroraA.current, auroraB: auroraB.current,
       bloom: bloom.current, rangoli: rangoli.current, sparks: sparks.current,
@@ -112,7 +112,6 @@ export default function Loader() {
       // count-in / kolam draw
       const cp = C((t - T.still) / (T.countEnd - T.still));
       const draw = p2io(cp);
-      el.counter.textContent = Math.round(100 * draw);
       el.kolam1.style.strokeDashoffset = String(1 - draw);
       el.kolam2.style.strokeDashoffset = String(C(1 - draw * 1.12));
       el.auroraA.style.opacity = String(0.6 * C((t - T.still) / 520));
@@ -124,7 +123,6 @@ export default function Loader() {
       const si = Math.max(0, Math.min(3, Math.floor(cp * 3.9999)));
       el.syllable.textContent = SYLLABLES[si];
       el.syllable.style.transform = "scale(" + (1 + 0.24 * beat) + ")";
-      el.counter.style.transform = "scale(" + (1 + 0.045 * beat) + ")";
 
       // the sam (strike)
       const sam = C((t - T.countEnd) / (T.samEnd - T.countEnd));
@@ -226,28 +224,17 @@ export default function Loader() {
         <g ref={sparks} style={{ opacity: 0 }} dangerouslySetInnerHTML={{ __html: SPARKS_HTML }} />
       </svg>
 
-      {/* count-in numerals + konnakol syllable */}
+      {/* konnakol count-in — syllable only (no numerals) */}
       <div
         style={{
           position: "absolute", zIndex: 3, left: "50%", top: "50%", transform: "translate(-50%,-50%)",
           display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", pointerEvents: "none",
         }}
       >
-        <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "11px", letterSpacing: "0.42em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "6px" }}>
+        <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "11px", letterSpacing: "0.42em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "10px" }}>
           Count-in
         </span>
-        <span
-          ref={counter}
-          style={{
-            fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(72px,10vw,140px)", lineHeight: 1,
-            letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums", background: "var(--thayya-gradient)",
-            backgroundSize: "300% 100%", WebkitBackgroundClip: "text", backgroundClip: "text",
-            WebkitTextFillColor: "transparent", animation: "thy-flow 4.5s linear infinite",
-          }}
-        >
-          0
-        </span>
-        <span ref={syllable} style={{ fontFamily: "var(--font-tamil)", fontWeight: 500, fontSize: "clamp(26px,3.4vw,46px)", lineHeight: 1, color: "var(--ink)", marginTop: "10px", minHeight: "1.1em" }}>
+        <span ref={syllable} style={{ fontFamily: "var(--font-tamil)", fontWeight: 500, fontSize: "clamp(40px,6vw,72px)", lineHeight: 1, color: "var(--ink)", minHeight: "1.1em" }}>
           தை
         </span>
       </div>
