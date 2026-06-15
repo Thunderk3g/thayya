@@ -10,8 +10,8 @@ import styles from "./Loader.module.css";
  * On the "sam" (~1.6s) a 12-fold rangoli blooms, light + sparks burst, then the
  * cream curtain lifts away. Signals the hero via `window.__thayyaRevealed` and
  * the `thayya:reveal` event at the start of the lift, so the hero crosses in
- * underneath the rising curtain. First visit per session only; reduced-motion
- * and repeat visits reveal instantly.
+ * underneath the rising curtain. Plays in full on every page load;
+ * reduced-motion reveals instantly.
  */
 
 // ---------- pure geometry (module scope, computed once) ----------
@@ -70,7 +70,7 @@ function bez(x, x1, y1, x2, y2) {
 }
 const easeBeat = (t) => bez(clamp(t), 0.62, 0.05, 0.01, 0.99);
 
-const T = { still: 150, countEnd: 1450, samEnd: 1700, total: 2400 };
+const T = { still: 190, countEnd: 1810, samEnd: 2130, total: 3000 };
 const SYLLABLES = ["தை", "யா", "தக", "திமி"];
 const KOLAM1_D = epitrochoid(8, 3, 4.6, 150, 720, 0);
 const KOLAM2_D = epitrochoid(12, 5, 2.2, 93, 820, 15);
@@ -92,10 +92,10 @@ export default function Loader() {
       window.dispatchEvent(new CustomEvent("thayya:reveal"));
     };
 
+    // Plays on every page load — no first-visit gate. Reduced-motion still
+    // reveals instantly (no count, no curtain) for accessibility.
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const seen = sessionStorage.getItem("thayya-loaded");
-    if (seen || reduced) { reveal(); setActive(false); return; }
-    sessionStorage.setItem("thayya-loaded", "1");
+    if (reduced) { reveal(); setActive(false); return; }
 
     const el = {
       root: root.current, counter: counter.current, syllable: syllable.current,
