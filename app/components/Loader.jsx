@@ -73,7 +73,6 @@ const easeBeat = (t) => bez(clamp(t), 0.62, 0.05, 0.01, 0.99);
 const T = { still: 190, countEnd: 1810, samEnd: 2130, total: 3000 };
 const SYLLABLES = ["தை", "யா", "தக", "திமி"];
 const KOLAM1_D = epitrochoid(8, 3, 4.6, 150, 720, 0);
-const KOLAM2_D = epitrochoid(12, 5, 2.2, 93, 820, 15);
 const RANGOLI_HTML = buildRangoli();
 const SPARKS_HTML = buildSparks();
 const GRAIN = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E")`;
@@ -82,7 +81,7 @@ export default function Loader() {
   const [active, setActive] = useState(true);
   const root = useRef(null);
   const syllable = useRef(null);
-  const kolam1 = useRef(null), kolam2 = useRef(null), kolamSvg = useRef(null);
+  const kolam1 = useRef(null), kolamSvg = useRef(null);
   const auroraA = useRef(null), auroraB = useRef(null);
   const bloom = useRef(null), rangoli = useRef(null), sparks = useRef(null);
 
@@ -99,7 +98,7 @@ export default function Loader() {
 
     const el = {
       root: root.current, syllable: syllable.current,
-      kolam1: kolam1.current, kolam2: kolam2.current, kolamSvg: kolamSvg.current,
+      kolam1: kolam1.current, kolamSvg: kolamSvg.current,
       auroraA: auroraA.current, auroraB: auroraB.current,
       bloom: bloom.current, rangoli: rangoli.current, sparks: sparks.current,
     };
@@ -113,7 +112,6 @@ export default function Loader() {
       const cp = C((t - T.still) / (T.countEnd - T.still));
       const draw = p2io(cp);
       el.kolam1.style.strokeDashoffset = String(1 - draw);
-      el.kolam2.style.strokeDashoffset = String(C(1 - draw * 1.12));
       el.auroraA.style.opacity = String(0.6 * C((t - T.still) / 520));
       el.auroraB.style.opacity = String(0.5 * C((t - T.still) / 720));
 
@@ -219,7 +217,6 @@ export default function Loader() {
         </defs>
         <circle ref={bloom} cx="0" cy="0" r="150" fill="url(#thyBloom)" opacity="0" style={{ mixBlendMode: "multiply" }} />
         <g ref={rangoli} opacity="0" dangerouslySetInnerHTML={{ __html: RANGOLI_HTML }} />
-        <path ref={kolam2} d={KOLAM2_D} fill="none" stroke="url(#thyStroke)" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" pathLength="1" strokeDasharray="1" strokeDashoffset="1" opacity="0.55" />
         <path ref={kolam1} d={KOLAM1_D} fill="none" stroke="url(#thyStroke)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" pathLength="1" strokeDasharray="1" strokeDashoffset="1" />
         <g ref={sparks} style={{ opacity: 0 }} dangerouslySetInnerHTML={{ __html: SPARKS_HTML }} />
       </svg>
