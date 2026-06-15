@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Anek+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:#0c0a14; }
+    @keyframes thy-aurora-a{ 0%{ transform:translate(-12%,-6%) scale(1); } 50%{ transform:translate(8%,6%) scale(1.18); } 100%{ transform:translate(-12%,-6%) scale(1); } }
+    @keyframes thy-aurora-b{ 0%{ transform:translate(10%,8%) scale(1.1); } 50%{ transform:translate(-8%,-8%) scale(1.28); } 100%{ transform:translate(10%,8%) scale(1.1); } }
+    @keyframes thy-grain{ 0%{ transform:translate(0,0); } 10%{ transform:translate(-3%,-2%); } 30%{ transform:translate(2%,-4%); } 50%{ transform:translate(-4%,3%); } 70%{ transform:translate(3%,2%); } 90%{ transform:translate(-2%,4%); } 100%{ transform:translate(0,0); } }
+    @keyframes thy-flow{ 0%{ background-position:0% 50%; } 100%{ background-position:300% 50%; } }
+  </style>
+</helmet>
+<div data-ref="root" data-screen-label="Thayya Loader" style="--saffron:#f66917; --vermilion:#f04226; --rani:#bd23a2; --violet:#9f26a7; --teal:#07aeae; --marigold:#ffb627; --peacock:#0e86c4; --indigo:#34208c; --gold:#d4a437; --midnight:#14102e; --paper:#faf8f4; --paper-deep:#f1ede5; --ink:#0f1112; --ink-soft:#5f5d59; --kolam-dot:rgba(15,17,18,0.22); --thayya-gradient:linear-gradient(100deg,#f66917 0%,#f04226 25%,#bd23a2 50%,#9f26a7 72%,#07aeae 100%); position:relative; width:100%; height:100vh; min-height:560px; overflow:hidden; background:var(--paper); font-family:'Plus Jakarta Sans',sans-serif; -webkit-font-smoothing:antialiased;">
+
+    <!-- ============ HERO (painted behind, revealed) ============ -->
+    <section data-ref="hero" style="position:absolute; inset:0; z-index:1; background:var(--paper); display:flex; flex-direction:column; padding:clamp(22px,4vw,52px); overflow:hidden;">
+      <div data-ref="hero-grain" aria-hidden="true" style="position:absolute; inset:-30%; z-index:0; pointer-events:none; opacity:0.45; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E&quot;); animation:thy-grain 7s steps(6) infinite;"></div>
+      <div aria-hidden="true" style="position:absolute; right:-12%; top:-18%; z-index:0; width:62vmin; height:62vmin; border-radius:50%; pointer-events:none; opacity:0.5; filter:blur(46px); background:radial-gradient(circle at 50% 50%, rgba(246,105,23,0.5), rgba(189,35,162,0.18) 55%, transparent 72%);"></div>
+
+      <header data-ref="hero-top" style="position:relative; z-index:2; display:flex; align-items:baseline; justify-content:space-between; gap:18px;">
+        <span style="font-family:'Unbounded',sans-serif; font-weight:800; font-size:clamp(17px,1.9vw,24px); letter-spacing:0.02em; color:var(--ink);">thayya</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:clamp(10px,1vw,12px); letter-spacing:0.28em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap;">Made in India &nbsp;·&nbsp; 96 BPM</span>
+      </header>
+      <div style="position:relative; z-index:2; height:1px; margin-top:14px; background:rgba(15,17,18,0.16);"></div>
+
+      <div style="position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <span data-ref="hero-eyebrow" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:clamp(11px,1.1vw,13px); letter-spacing:0.34em; text-transform:uppercase; color:var(--rani); margin-bottom:clamp(14px,2vw,22px);">Dance &amp; fitness · rooted in rhythm</span>
+        <h1 style="margin:0; font-family:'Unbounded',sans-serif; font-weight:700; line-height:0.92; letter-spacing:-0.01em; font-size:clamp(54px,11vw,168px); color:var(--ink);">
+          <span data-ref="hero-l1" style="display:block;">Move.</span>
+          <span data-ref="hero-l2" style="display:block;">Rise.</span>
+          <span data-ref="hero-l3" style="display:block; background:var(--thayya-gradient); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:thy-flow 6s linear infinite;">Shine.</span>
+        </h1>
+        <p data-ref="hero-sub" style="max-width:46ch; margin:clamp(20px,3vw,34px) 0 0; font-size:clamp(14px,1.3vw,18px); line-height:1.5; color:var(--ink-soft);">Find your beat, your people, your power — one class at a time. The count-in is over. Step in.</p>
+      </div>
+
+      <footer data-ref="hero-foot" style="position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:18px; padding-top:14px; border-top:1px solid rgba(15,17,18,0.16);">
+        <span style="font-family:'Anek Tamil',sans-serif; font-size:clamp(15px,1.6vw,22px); color:var(--ink); letter-spacing:0.04em;">தை · யா · தக · திமி</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:clamp(10px,1vw,12px); letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-soft);">Scroll to begin ↓</span>
+      </footer>
+    </section>
+
+    <!-- ============ LOADER CURTAIN (z 100) ============ -->
+    <div data-ref="curtain" aria-hidden="true" style="position:absolute; inset:0; z-index:100; background:var(--paper); overflow:hidden; will-change:transform; display:flex; align-items:center; justify-content:center;">
+
+      <div aria-hidden="true" style="position:absolute; inset:0; z-index:0; opacity:0.9; background-image:radial-gradient(var(--kolam-dot) 1.4px, transparent 1.6px); background-size:30px 30px; background-position:center;"></div>
+
+      <div data-ref="auroraA" aria-hidden="true" style="position:absolute; z-index:1; width:78vmin; height:78vmin; left:8%; top:6%; border-radius:50%; pointer-events:none; filter:blur(56px); opacity:0.0; background:radial-gradient(circle at 50% 50%, rgba(246,105,23,0.62), rgba(240,66,38,0.2) 52%, transparent 72%); animation:thy-aurora-a 11s ease-in-out infinite;"></div>
+      <div data-ref="auroraB" aria-hidden="true" style="position:absolute; z-index:1; width:70vmin; height:70vmin; right:6%; bottom:4%; border-radius:50%; pointer-events:none; filter:blur(58px); opacity:0.0; background:radial-gradient(circle at 50% 50%, rgba(159,38,167,0.5), rgba(7,174,174,0.2) 55%, transparent 74%); animation:thy-aurora-b 13s ease-in-out infinite;"></div>
+
+      <svg data-ref="kolamSvg" viewBox="-160 -160 320 320" style="position:absolute; z-index:2; width:min(88vmin,580px); height:min(88vmin,580px); left:50%; top:50%; transform:translate(-50%,-50%); overflow:visible;">
+        <defs>
+          <linearGradient id="thyStroke" x1="0" y1="0" x2="1" y2="0.35">
+            <stop offset="0" stop-color="#f66917"></stop>
+            <stop offset="0.25" stop-color="#f04226"></stop>
+            <stop offset="0.5" stop-color="#bd23a2"></stop>
+            <stop offset="0.72" stop-color="#9f26a7"></stop>
+            <stop offset="1" stop-color="#07aeae"></stop>
+          </linearGradient>
+          <radialGradient id="thyBloom" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#ffb627" stop-opacity="0.95"></stop>
+            <stop offset="0.4" stop-color="#f66917" stop-opacity="0.55"></stop>
+            <stop offset="1" stop-color="#f66917" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <circle data-ref="bloom" cx="0" cy="0" r="150" fill="url(#thyBloom)" opacity="0" style="mix-blend-mode:multiply;"></circle>
+        <g data-ref="rangoli" opacity="0"></g>
+        <path data-ref="kolam2" fill="none" stroke="url(#thyStroke)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" opacity="0.55"></path>
+        <path data-ref="kolam1" fill="none" stroke="url(#thyStroke)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></path>
+        <g data-ref="sparks"></g>
+      </svg>
+
+      <div data-ref="center" style="position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; text-align:center; pointer-events:none;">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;">Count&#8202;-&#8202;in</span>
+        <span data-ref="counter" style="font-family:'Unbounded',sans-serif; font-weight:700; font-size:clamp(72px,10vw,140px); line-height:1; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; background:var(--thayya-gradient); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:thy-flow 4.5s linear infinite;">0</span>
+        <span data-ref="syllable" style="font-family:'Anek Tamil',sans-serif; font-weight:500; font-size:clamp(26px,3.4vw,46px); line-height:1; color:var(--ink); margin-top:10px; min-height:1.1em;">தை</span>
+      </div>
+
+      <div data-ref="motto" style="position:absolute; z-index:5; left:0; right:0; bottom:clamp(26px,5vh,52px); text-align:center; pointer-events:none;">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:clamp(11px,1.2vw,14px); letter-spacing:0.46em; text-transform:uppercase; color:var(--ink-soft);">Move. &nbsp;Rise. &nbsp;Shine.</span>
+      </div>
+
+      <div aria-hidden="true" style="position:absolute; inset:-30%; z-index:6; pointer-events:none; opacity:0.4; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E&quot;); animation:thy-grain 6s steps(6) infinite;"></div>
+    </div>
+
+    <!-- ============ PREVIEW CONTROLS (chrome, not part of design) ============ -->
+    <div style="position:fixed; z-index:200; left:50%; bottom:18px; transform:translateX(-50%); display:flex; align-items:center; gap:14px; padding:9px 14px 9px 16px; border-radius:999px; background:rgba(16,12,28,0.82); backdrop-filter:blur(10px); box-shadow:0 10px 30px rgba(0,0,0,0.32); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; max-width:calc(100% - 28px);">
+      <button data-ref="replayBtn" onClick="{{ onReplay }}" style="display:flex; align-items:center; gap:7px; border:none; cursor:pointer; padding:8px 14px; border-radius:999px; background:var(--thayya-gradient); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">▶ Replay</button>
+      <input data-ref="scrub" type="range" min="0" max="2400" value="0" step="1" onInput="{{ onScrubInput }}" style="width:min(40vw,300px); accent-color:#ffb627; cursor:pointer;">
+      <span data-ref="timeLabel" style="font-variant-numeric:tabular-nums; font-size:12px; font-weight:600; letter-spacing:0.04em; color:rgba(255,255,255,0.86); min-width:80px; text-align:right;">0.00s</span>
+      <span data-ref="rmBadge" style="display:none; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#ffb627;">reduced-motion</span>
+    </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  // Timeline marks (ms)
+  T = { still: 150, countEnd: 1450, samEnd: 1700, total: 2400 };
+
+  componentDidMount() { this.init(); }
+
+  init() {
+    if (this.inited) return;
+    const root = document.querySelector('[data-ref="root"]');
+    if (!root) return;
+    this.inited = true;
+    this.root = root;
+    const $ = (n) => document.querySelector('[data-ref="' + n + '"]');
+    this.el = {
+      root, hero: $('hero'), curtain: $('curtain'),
+      auroraA: $('auroraA'), auroraB: $('auroraB'),
+      kolamSvg: $('kolamSvg'), kolam1: $('kolam1'), kolam2: $('kolam2'),
+      rangoli: $('rangoli'), sparks: $('sparks'), bloom: $('bloom'),
+      center: $('center'), counter: $('counter'), syllable: $('syllable'),
+      motto: $('motto'),
+      heroParts: ['hero-eyebrow','hero-l1','hero-l2','hero-l3','hero-sub','hero-top','hero-foot'].map($),
+      scrub: $('scrub'), timeLabel: $('timeLabel'), rmBadge: $('rmBadge'),
+    };
+    this.syllables = ['தை','யா','தக','திமி'];
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.buildMotifs();
+    this.boot();
+  }
+
+  componentWillUnmount(){ if (this.raf) cancelAnimationFrame(this.raf); }
+
+  // ---------- easing ----------
+  clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  p2io(t){ return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2; }
+  expoIO(t){ if(t<=0)return 0; if(t>=1)return 1; return t<0.5 ? Math.pow(2,20*t-10)/2 : (2-Math.pow(2,-20*t+10))/2; }
+  expoOut(t){ return t>=1 ? 1 : 1-Math.pow(2,-10*t); }
+  bez(x,x1,y1,x2,y2){ const cx=3*x1,bx=3*(x2-x1)-cx,ax=1-cx-bx,cy=3*y1,by=3*(y2-y1)-cy,ay=1-cy-by; const fx=(t)=>((ax*t+bx)*t+cx)*t,fy=(t)=>((ay*t+by)*t+cy)*t; let t0=0,t1=1,t=x; for(let i=0;i<24;i++){ const e=fx(t)-x; if(Math.abs(e)<1e-4)break; if(e>0)t1=t; else t0=t; t=(t0+t1)/2; } return fy(t); }
+  easeBeat(t){ return this.bez(this.clamp(t),0.62,0.05,0.01,0.99); }
+  gcd(a,b){ return b ? this.gcd(b, a%b) : a; }
+
+  // ---------- motif generation ----------
+  epitrochoid(R,r,d,fit,steps,rotDeg){
+    const close = 2*Math.PI*(r/this.gcd(R,r)), max=(R+r)+d, k=fit/max, rot=(rotDeg||0)*Math.PI/180, c=Math.cos(rot), s=Math.sin(rot);
+    let path='';
+    for(let i=0;i<=steps;i++){
+      const th=close*i/steps;
+      let x=((R+r)*Math.cos(th)-d*Math.cos((R+r)/r*th))*k;
+      let y=((R+r)*Math.sin(th)-d*Math.sin((R+r)/r*th))*k;
+      if(rot){ const nx=x*c-y*s, ny=x*s+y*c; x=nx; y=ny; }
+      path += (i?'L':'M') + x.toFixed(2) + ' ' + y.toFixed(2);
+    }
+    return path + 'Z';
+  }
+
+  buildRangoli(){
+    let g='<circle cx="0" cy="0" r="20" fill="none" stroke="url(#thyStroke)" stroke-width="1.1"></circle>';
+    g+='<circle cx="0" cy="0" r="9" fill="none" stroke="url(#thyStroke)" stroke-width="1"></circle>';
+    const petal='M0 -22 C 10 -40 9 -64 0 -84 C -9 -64 -10 -40 0 -22 Z';
+    for(let i=0;i<12;i++){ g+='<g transform="rotate('+(i*30)+')"><path d="'+petal+'" fill="none" stroke="url(#thyStroke)" stroke-width="1.3"></path><circle cx="0" cy="-92" r="2" fill="#bd23a2"></circle></g>'; }
+    for(let i=0;i<24;i++){ const a=(i/24)*Math.PI*2; g+='<circle cx="'+(Math.cos(a)*104).toFixed(1)+'" cy="'+(Math.sin(a)*104).toFixed(1)+'" r="1.3" fill="#9f26a7"></circle>'; }
+    return g;
+  }
+
+  buildMotifs(){
+    const el=this.el;
+    el.kolam1.setAttribute('d', this.epitrochoid(8,3,4.6,150,720,0));
+    el.kolam2.setAttribute('d', this.epitrochoid(12,5,2.2,93,820,15));
+    let s='';
+    for(let i=0;i<16;i++){ const a=(i/16)*Math.PI*2, x=(Math.cos(a)*120).toFixed(1), y=(Math.sin(a)*120).toFixed(1), big=i%2===0; s+='<circle cx="'+x+'" cy="'+y+'" r="'+(big?2.6:1.6)+'" fill="'+(big?'#ffb627':'#d4a437')+'"></circle>'; }
+    el.sparks.innerHTML=s;
+    el.rangoli.innerHTML=this.buildRangoli();
+  }
+
+  reveal(){ window.__thayyaRevealed=true; window.dispatchEvent(new CustomEvent('thayya:reveal')); }
+
+  // ---------- the deterministic timeline ----------
+  apply(t){
+    const el=this.el, T=this.T, C=(x)=>this.clamp(x);
+    if(el.timeLabel) el.timeLabel.textContent=(t/1000).toFixed(2)+'s';
+    if(el.scrub && document.activeElement!==el.scrub) el.scrub.value=Math.round(t);
+
+    // --- count-in / build ---
+    const cp=C((t-T.still)/(T.countEnd-T.still));
+    const draw=this.p2io(cp);
+    el.counter.textContent=Math.round(100*draw);
+    el.kolam1.style.strokeDashoffset=String(1-draw);
+    el.kolam2.style.strokeDashoffset=String(C(1-draw*1.12));
+    el.auroraA.style.opacity=String(0.6*C((t-T.still)/520));
+    el.auroraB.style.opacity=String(0.5*C((t-T.still)/720));
+
+    // --- konnakol beats (4 strikes across the build) ---
+    const span=T.countEnd-T.still; let beat=0;
+    for(let k=0;k<4;k++){ const tb=T.still+k*span/4; if(t>=tb){ const e=Math.exp(-(t-tb)/150); if(e>beat)beat=e; } }
+    const si=Math.max(0,Math.min(3,Math.floor(cp*3.9999)));
+    el.syllable.textContent=this.syllables[si];
+    el.syllable.style.transform='scale('+(1+0.24*beat)+')';
+    el.counter.style.transform='scale('+(1+0.045*beat)+')';
+
+    // --- the sam (strike) ---
+    const sam=C((t-T.countEnd)/(T.samEnd-T.countEnd));
+    const samE=this.easeBeat(sam);
+    const arc=Math.sin(Math.PI*sam);
+    el.bloom.setAttribute('opacity', String(arc*0.92));
+    el.bloom.style.transform='scale('+(0.2+1.05*samE)+')';
+    el.rangoli.setAttribute('opacity', String(samE));
+    el.rangoli.style.transform='rotate('+(-18*(1-samE))+'deg) scale('+(0.82+0.18*samE)+')';
+    el.kolamSvg.style.filter='saturate('+(1+0.85*arc)+') brightness('+(1+0.16*arc)+')';
+    const twinkle=Math.max(beat, arc);
+    el.sparks.style.opacity=String(C((t-T.still)/420)*(0.22+0.78*twinkle));
+    el.sparks.style.transform='scale('+(1+0.6*samE)+')';
+
+    // --- curtain lift + handoff ---
+    const cl=C((t-T.samEnd)/(T.total-T.samEnd));
+    el.curtain.style.transform='translateY('+(-100*this.expoIO(cl))+'%)';
+    if(!this.fired && t>=T.samEnd){ this.fired=true; this.reveal(); }
+    if(t<T.samEnd && this.fired){ this.fired=false; window.__thayyaRevealed=false; }
+
+    // --- hero entrance under the rising curtain (staggered) ---
+    el.heroParts.forEach((p,i)=>{ if(!p)return; const d=i*0.05, e=this.expoOut(C((cl-d)/(1-d))); p.style.opacity=String(e); p.style.transform='translateY('+(20*(1-e))+'px)'; });
+  }
+  boot(){
+    // Reduced motion / repeat-visit: honor the contract — reveal instantly, no count, no curtain.
+    if (this.reduced){
+      if (this.el.rmBadge) this.el.rmBadge.style.display = 'inline';
+      this.fired = false;
+      this.apply(this.T.total);   // jumps to fully revealed; apply() fires thayya:reveal
+      return;                     // Replay still works to preview the motion
+    }
+    this.play();
+  }
+
+  play(){
+    this.fired = false;
+    this.start = performance.now();
+    const loop = (now) => {
+      let t = now - this.start;
+      if (t >= this.T.total) { t = this.T.total; this.apply(t); this.raf = null; return; }
+      this.apply(t);
+      this.raf = requestAnimationFrame(loop);
+    };
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame(loop);
+  }
+
+  renderVals() {
+    if (!this.inited && !this._sched) { this._sched = true; requestAnimationFrame(() => requestAnimationFrame(() => this.init())); }
+    return {
+      rootRef: (el) => { if (el) { this.root = el; requestAnimationFrame(() => this.init()); } },
+      onReplay: () => this.play(),
+      onScrubInput: (e) => {
+        if (this.raf) { cancelAnimationFrame(this.raf); this.raf = null; }
+        this.apply(Number(e.target.value));
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

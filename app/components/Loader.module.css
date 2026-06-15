@@ -1,59 +1,24 @@
+/* First-visit overture curtain. Fixed full-viewport over the page; lifts away
+   on the "sam". Only shown when JS is present to also dismiss it (html.js).
+   All inner visuals are inline-styled in Loader.jsx to mirror the design. */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 100;
   background: var(--paper);
+  overflow: hidden;
   display: none;
   align-items: center;
   justify-content: center;
+  will-change: transform;
 }
 
-/* only ever shown when JS can also dismiss it */
 :global(html.js) .loader {
   display: flex;
 }
 
-.center {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s3);
-  position: relative;
-}
-
-.num {
-  font-size: clamp(72px, 10vw, 140px);
-  font-variant-numeric: tabular-nums;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.auroraA {
-  width: 44vw;
-  height: 44vw;
-  top: -12%;
-  left: -8%;
-  background: radial-gradient(circle, var(--saffron), transparent 65%);
-}
-
-.auroraB {
-  width: 40vw;
-  height: 40vw;
-  bottom: -14%;
-  right: -6%;
-  background: radial-gradient(circle, var(--violet), transparent 65%);
-  animation-delay: -9s;
-}
-
-.syl {
-  font-size: clamp(20px, 2.4vw, 32px);
-  color: var(--ink-soft);
-}
-
-.motto {
-  position: absolute;
-  bottom: var(--s5);
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--ink-soft);
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    transition: none;
+  }
 }

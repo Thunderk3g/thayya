@@ -446,3 +446,28 @@ html.js .line-mask > * {
     transform: none;
   }
 }
+
+/* ── Loader overture (Thayya Loader.dc.html) — drift/grain/gradient-flow ── */
+@keyframes thy-aurora-a {
+  0% { transform: translate(-12%, -6%) scale(1); }
+  50% { transform: translate(8%, 6%) scale(1.18); }
+  100% { transform: translate(-12%, -6%) scale(1); }
+}
+@keyframes thy-aurora-b {
+  0% { transform: translate(10%, 8%) scale(1.1); }
+  50% { transform: translate(-8%, -8%) scale(1.28); }
+  100% { transform: translate(10%, 8%) scale(1.1); }
+}
+@keyframes thy-grain {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-3%, -2%); }
+  30% { transform: translate(2%, -4%); }
+  50% { transform: translate(-4%, 3%); }
+  70% { transform: translate(3%, 2%); }
+  90% { transform: translate(-2%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes thy-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
